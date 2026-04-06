@@ -1,17 +1,27 @@
+const LEVELS = { debug: 0, info: 1, warn: 2, error: 3 };
+
 export class Logger {
+  constructor(level = "info") {
+    this.level = LEVELS[level];
+  }
+
   info(message) {
-    console.log(`[INFO] [${new Date()}] ${message}`);
+    if (LEVELS.debug >= this.level)
+      console.log(`[INFO] [${new Date().toISOString()}] ${message}`);
   }
 
   warn(message) {
-    console.warn(`[WARN] [${new Date()}] ${message}`);
+    if (LEVELS.warn >= this.level)
+      console.warn(`[WARN] [${new Date().toISOString()}] ${message}`);
   }
 
   debug(message) {
-    console.debug(`[DEBUG] [${new Date()}] ${message}`);
+    if (LEVELS.debug >= this.level)
+      console.debug(`[DEBUG] [${new Date()}] ${message}`);
   }
 
   error(message) {
-    console.error(`[ERROR] [${new Date()}] ${message}`);
+    if (LEVELS.error >= this.level)
+      console.error(`[ERROR] [${new Date()}] ${message}`);
   }
 }
