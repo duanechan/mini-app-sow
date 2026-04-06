@@ -1,12 +1,12 @@
 import express from "express";
 import { config } from "./lib/config.js";
 import { logger } from "./lib/log.js";
-import { usersRouter } from "./routes/users.route.js";
+import { authRouter } from "./routes/auth.route.js";
 
 const app = express();
 
 app.use(express.json());
-app.use("/users", usersRouter);
+app.use("/auth", authRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello, world!");

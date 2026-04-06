@@ -29,3 +29,7 @@ dist-ssr
 
 # Drizzle
 .drizzle
+
+# REST client
+*.http
+*.request
