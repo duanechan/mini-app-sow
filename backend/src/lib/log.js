@@ -1,3 +1,5 @@
+import { logLevel } from "./config.js";
+
 const LEVELS = { debug: 0, info: 1, warn: 2, error: 3 };
 
 export class Logger {
@@ -6,7 +8,7 @@ export class Logger {
   }
 
   info(message) {
-    if (LEVELS.debug >= this.level)
+    if (LEVELS.info >= this.level)
       console.log(`[INFO] [${new Date().toISOString()}] ${message}`);
   }
 
@@ -17,11 +19,13 @@ export class Logger {
 
   debug(message) {
     if (LEVELS.debug >= this.level)
-      console.debug(`[DEBUG] [${new Date()}] ${message}`);
+      console.debug(`[DEBUG] [${new Date().toISOString()}] ${message}`);
   }
 
   error(message) {
     if (LEVELS.error >= this.level)
-      console.error(`[ERROR] [${new Date()}] ${message}`);
+      console.error(`[ERROR] [${new Date().toISOString()}] ${message}`);
   }
 }
+
+export const logger = new Logger(logLevel);
