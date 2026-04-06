@@ -1,6 +1,5 @@
-import { getOrThrow } from "./config.js";
+import { config } from "./config.js";
 
-const LOG_LEVEL = getOrThrow("LOG_LEVEL");
 const LEVELS = { debug: 0, info: 1, warn: 2, error: 3 };
 
 export class Logger {
@@ -30,4 +29,4 @@ export class Logger {
   }
 }
 
-export const logger = new Logger(LOG_LEVEL);
+export const logger = new Logger(config.logLevel);
