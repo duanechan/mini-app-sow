@@ -1,16 +1,9 @@
-const port = process.env.PORT;
-if (!port) {
-  throw new Error("Port environment variable not set");
-}
+import "dotenv/config";
 
-const logLevel = process.env.LOG_LEVEL;
-if (!logLevel) {
-  throw new Error("Log level environment variable not set");
+export function getOrThrow(key) {
+  const value = process.env[key];
+  if (!value) {
+    throw new Error(`${key} environment variable not set`);
+  }
+  return value;
 }
-
-const dbUrl = process.env.DB_URL;
-if (!dbUrl) {
-  throw new Error("DB URL environment variable not set");
-}
-
-export { dbUrl, logLevel, port };

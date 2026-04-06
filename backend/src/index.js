@@ -1,9 +1,9 @@
-import "dotenv/config";
 import express from "express";
-import { port } from "./lib/config.js";
+import { getOrThrow } from "./lib/config.js";
 import { logger } from "./lib/log.js";
 import { usersRouter } from "./routes/users.route.js";
 
+const PORT = getOrThrow("PORT");
 const app = express();
 
 app.use(express.json());
@@ -13,4 +13,4 @@ app.get("/", (req, res) => {
   res.send("Hello, world!");
 });
 
-app.listen(port, () => logger.info(`Server running on port ${port}`));
+app.listen(PORT, () => logger.info(`Server running on port ${PORT}`));

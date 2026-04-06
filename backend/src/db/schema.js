@@ -21,7 +21,7 @@ export const users = pgTable("users", {
   companyName: varchar("company_name", { length: 200 }),
 });
 
-const unitEnum = pgEnum("unit", [
+export const unitEnum = pgEnum("unit", [
   "kilometers/hour",
   "kilograms",
   "meters",

@@ -1,0 +1,1 @@
+CREATE TYPE "public"."unit" AS ENUM('kilometers/hour', 'kilograms', 'meters', 'grams', 'N/A');

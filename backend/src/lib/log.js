@@ -1,9 +1,11 @@
-import { logLevel } from "./config.js";
+import { getOrThrow } from "./config.js";
 
+const LOG_LEVEL = getOrThrow("LOG_LEVEL");
 const LEVELS = { debug: 0, info: 1, warn: 2, error: 3 };
 
 export class Logger {
   constructor(level = "info") {
+    this.info(`Logger (Level ${level}) initialized`);
     this.level = LEVELS[level];
   }
 
@@ -28,4 +30,4 @@ export class Logger {
   }
 }
 
-export const logger = new Logger(logLevel);
+export const logger = new Logger(LOG_LEVEL);

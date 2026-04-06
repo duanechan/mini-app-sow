@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1775483465488,
-      "tag": "0000_mighty_blue_marvel",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1775491829248,
-      "tag": "0001_magenta_rictor",
+      "when": 1775496704780,
+      "tag": "0000_shiny_madelyne_pryor",
       "breakpoints": true
     }
   ]
