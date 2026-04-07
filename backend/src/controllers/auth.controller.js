@@ -47,7 +47,6 @@ export async function login(req, res) {
   } catch (error) {
     logger.error(error.message);
     return res.status(401).json({
-      code: 401,
       message: "Failed to login",
     });
   }

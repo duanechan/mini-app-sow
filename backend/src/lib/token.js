@@ -17,16 +17,12 @@ export function createJWT(user) {
   );
 }
 
-export function validateJWT(token, user) {
+export function validateJWT(token) {
   try {
     const payload = jwt.verify(token, config.jwtSecret);
-    if (payload.sub !== user.id || payload.email !== user.email) {
-      return false;
-    }
-
-    return true;
+    return payload;
   } catch (error) {
     logger.warn(error);
-    return false;
+    return null;
   }
 }
