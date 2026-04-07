@@ -51,3 +51,8 @@ export async function login(req, res) {
     });
   }
 }
+
+export async function logout(req, res) {
+  res.clearCookie("JWT_COOKIE", { path: "/" });
+  return res.status(200).json({ message: "Logged out successfully" });
+}
