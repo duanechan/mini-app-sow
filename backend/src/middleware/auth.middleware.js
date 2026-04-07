@@ -1,3 +1,5 @@
+import { validateJWT } from "../lib/token.js";
+
 export function authMiddleware(req, res, next) {
   const cookie = req.cookies["JWT_COOKIE"];
   if (!cookie) {
