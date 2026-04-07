@@ -1,0 +1,1 @@
+ALTER TABLE "products" ALTER COLUMN "article_number" SET DATA TYPE bigint;

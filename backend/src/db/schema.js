@@ -1,4 +1,5 @@
 import {
+  bigint,
   integer,
   pgEnum,
   pgTable,
@@ -26,7 +27,7 @@ export const unitEnum = pgEnum("unit", [
   "kilograms",
   "meters",
   "grams",
-  "N/A",
+  "pcs",
 ]);
 
 export const products = pgTable("products", {
@@ -39,11 +40,11 @@ export const products = pgTable("products", {
   userId: uuid("user_id")
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
-  articleNo: integer("article_number").notNull(),
+  articleNo: bigint("article_number", { mode: "number" }).notNull(),
   productName: varchar("product_name", { length: 50 }).notNull(),
   inPrice: integer("in_price").notNull().default(0),
   price: integer("price").notNull().default(0),
-  unit: unitEnum("unit").notNull().default("N/A"),
+  unit: unitEnum("unit").notNull().default("pcs"),
   inStock: integer("in_stock").notNull().default(0),
   description: varchar("description", { length: 50 }),
 });

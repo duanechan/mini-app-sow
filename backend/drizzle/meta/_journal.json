@@ -22,6 +22,20 @@
       "when": 1775535497671,
       "tag": "0002_legal_sandman",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1775561027501,
+      "tag": "0003_bouncy_nextwave",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1775561750651,
+      "tag": "0004_colossal_hannibal_king",
+      "breakpoints": true
     }
   ]
 }
