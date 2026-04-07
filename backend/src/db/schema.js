@@ -36,6 +36,9 @@ export const products = pgTable("products", {
     .notNull()
     .defaultNow()
     .$onUpdate(() => new Date()),
+  userId: uuid("user_id")
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull(),
   articleNo: integer("article_number").notNull(),
   productName: varchar("product_name", { length: 50 }).notNull(),
   inPrice: integer("in_price").notNull().default(0),
@@ -43,4 +46,13 @@ export const products = pgTable("products", {
   unit: unitEnum("unit").notNull().default("N/A"),
   inStock: integer("in_stock").notNull().default(0),
   description: varchar("description", { length: 50 }),
+});
+
+export const langEnum = pgEnum("lang", ["en", "sv"]);
+
+export const translations = pgTable("translations", {
+  id: uuid("id").primaryKey().notNull().defaultRandom(),
+  lang: langEnum("lang").notNull(),
+  key: varchar("key").notNull(),
+  value: varchar("value").notNull(),
 });

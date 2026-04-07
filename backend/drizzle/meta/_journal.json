@@ -8,6 +8,20 @@
       "when": 1775496704780,
       "tag": "0000_shiny_madelyne_pryor",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1775533371184,
+      "tag": "0001_peaceful_inertia",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1775535497671,
+      "tag": "0002_legal_sandman",
+      "breakpoints": true
     }
   ]
 }
