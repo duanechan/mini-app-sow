@@ -2,6 +2,10 @@ import { logger } from "../lib/log.js";
 
 export function logMiddleware(req, res, next) {
   const start = Date.now();
+  res.on("error", (error) => {
+    logger.error(error.message);
+  });
+
   res.on("finish", () => {
     const end = Date.now() - start;
     logger.info(
