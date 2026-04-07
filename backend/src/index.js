@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(logMiddleware);
 
+app.use("/api/v1/healthz", (_, res) => res.status(200).send("OK"));
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/products", authMiddleware, productRouter);
 
