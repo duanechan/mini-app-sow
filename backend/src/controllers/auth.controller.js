@@ -1,5 +1,5 @@
 import argon2 from "argon2";
-import { getUserByEmail } from "../db/queries/users.js";
+import { getUserByEmail, getUserById } from "../db/queries/users.js";
 import { config } from "../lib/config.js";
 import { logger } from "../lib/log.js";
 import { createJWT } from "../lib/token.js";
@@ -55,4 +55,20 @@ export async function login(req, res) {
 export async function logout(req, res) {
   res.clearCookie("JWT_COOKIE", { path: "/" });
   return res.status(200).json({ message: "Logged out successfully" });
+}
+
+export async function me(req, res) {
+  const { sub: id, email } = req.user;
+  const user = await getUserById(id);
+
+  if (user.email !== email) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  return res.status(200).json({
+    email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    companyName: user.companyName,
+  });
 }
