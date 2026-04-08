@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from "@tanstack/react-router";
 import Login from "./pages/Login.jsx";
+import PriceList from "./pages/PriceListPage.jsx";
 
 const queryClient = new QueryClient();
 
@@ -15,15 +16,22 @@ const loginRoute = createRoute({
   path: "/login",
   component: Login,
 });
+const priceListRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/price-list",
+  component: PriceList,
+});
 
-const routeTree = rootRoute.addChildren([loginRoute]);
+const routeTree = rootRoute.addChildren([loginRoute, priceListRoute]);
 const router = createRouter({ routeTree });
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <main>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </main>
   );
 }
 
