@@ -1,36 +1,23 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  createRootRoute,
-  createRoute,
-  createRouter,
-  RouterProvider,
-} from "@tanstack/react-router";
+import { Navigate, Route, Routes } from "react-router";
+import ProtectedRoute from "./layouts/ProtectedRoute.jsx";
 import Login from "./pages/Login.jsx";
-import PriceList from "./pages/PriceListPage.jsx";
-
-const queryClient = new QueryClient();
-
-const rootRoute = createRootRoute();
-const loginRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/login",
-  component: Login,
-});
-const priceListRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/price-list",
-  component: PriceList,
-});
-
-const routeTree = rootRoute.addChildren([loginRoute, priceListRoute]);
-const router = createRouter({ routeTree });
+import PriceListPage from "./pages/PriceListPage.jsx";
 
 function App() {
   return (
     <main>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />}></Route>
+        <Route
+          path="/price-list"
+          element={
+            <ProtectedRoute>
+              <PriceListPage />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
     </main>
   );
 }

@@ -1,41 +1,36 @@
 import { EyeIcon, EyeSlashIcon } from "@phosphor-icons/react";
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import Header from "../components/Header.jsx";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordShown, setIsPasswordShown] = useState(false);
-  const {
-    mutate: login,
-    isPending,
-    error,
-  } = useMutation({
-    mutationFn: (credentials) =>
-      fetch("/api/v1/auth/login", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(credentials),
-      }).then((res) => {
-        if (!res.ok) throw new Error("Login failed");
-        return res.json();
-      }),
-    onSuccess: (data) => {
-      navigate({ to: "/price-list" });
-    },
-  });
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
     if (email.trim() === "" || password.trim() === "") {
       return;
     }
 
-    login({ email, password });
+    const cleanedEmail = email.trim();
+    if (!cleanedEmail.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) return;
+
+    const response = await fetch("/api/v1/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: cleanedEmail, password }),
+    });
+
+    if (response.ok) {
+      navigate("/price-list");
+    } else {
+      const { message } = response.body;
+      setError(message);
+    }
   }
 
   return (
@@ -80,6 +75,7 @@ export default function Login() {
                 </button>
               </div>
             </div>
+            {error && <span>{error}</span>}
             <button type="submit" id="login-button">
               Login
             </button>
