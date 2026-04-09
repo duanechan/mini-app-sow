@@ -1,14 +1,25 @@
 import { EyeIcon, EyeSlashIcon } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Header from "../components/Header.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { user, setUser } = useAuth();
+  const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordShown, setIsPasswordShown] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/v1/auth/me")
+      .then((res) => {
+        if (res.ok) navigate("/price-list");
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -32,6 +43,8 @@ export default function Login() {
       setError(message);
     }
   }
+
+  if (isLoading) return "Loading...";
 
   return (
     <div id="background-image">

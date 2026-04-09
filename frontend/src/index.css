@@ -17,20 +17,20 @@ body {
 
 /* Header */
 
-header {
+.public-header {
   width: 100%;
   position: absolute;
   margin: 2.5em 0 2.5em 0;
 }
 
-header ul {
+.public-header ul {
   display: flex;
   list-style: none;
   padding-left: 0;
   gap: 4rem;
 }
 
-header a {
+.public-header a {
   color: white;
   font-size: 1rem;
   font-weight: 600;
@@ -142,6 +142,12 @@ header a {
 /* Price list page */
 
 .price-list-page-container {
+}
+
+.user-header {
+  color: white;
+  font-weight: bold;
   display: flex;
-  background-color: white;
+  background-color: #0f7ee9;
+  padding: 0.5em 8em;
 }

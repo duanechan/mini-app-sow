@@ -13,7 +13,7 @@ export default function ProtectedRoute({ children }) {
         return res.json();
       })
       .then((data) => {
-        if (!data) return navigate("/login");
+        if (!data) navigate("/login");
         setUser(data);
       });
   }, []);
